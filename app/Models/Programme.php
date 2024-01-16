@@ -22,4 +22,9 @@ class Programme extends Model
         return $this->belongsToMany(Secteur::class);
     }
 
+    public function likes()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }

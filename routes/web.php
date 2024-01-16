@@ -34,9 +34,6 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
 Route::get('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('auth.register');
 Route::post('/register',[\App\Http\Controllers\AuthController::class, 'doRegister']);
 
-
-
-
 /// route to Candidats
 Route::controller(CandidatController::class)->group(function (){
     Route::get('/candidats','index')->name('candidat');
@@ -46,7 +43,6 @@ Route::controller(CandidatController::class)->group(function (){
         Route::get('/{candidat}/edit', 'edit')->name('editCandidat');
         Route::post('/{candidat}/edit', 'update')->name('updateCandidat');
     });
-
 });
 
 /// route to electeurs
@@ -58,10 +54,6 @@ Route::controller(ElecteurController::class)->group(function (){
         Route::get('/edit/{electeur}', 'edit')->name('editElecteur');
         Route::post('/edit/{electeur}', 'update');
     });
-
-
-
-
 });
 
 /// route to programmes
@@ -73,8 +65,6 @@ Route::controller(ProgrammeController::class)->group(function (){
         Route::get('/edit/{programme}', 'edit')->name('editProgramme');
         Route::post('/edit/{programme}', 'update');
     });
-
-
 });
 
 /// route to secteurs
@@ -85,7 +75,12 @@ Route::middleware('auth')->controller(SecteurController::class) ->group(function
         Route::get('/addSecteurs','create')->name('addSecteur');
         Route::get('/edit/{secteur}', 'edit')->name('editSecteur');
         Route::post('/edit/{secteur}', 'update');
-
     });
 });
 
+Route::middleware('auth')->group(function (){
+    Route::post('programmes/{programme}/like', [\App\Http\Controllers\ProgrammeLikeController::class, 'like'])
+    ->name('programme.like');
+    Route::post('programmes/{programme}/unlike', [\App\Http\Controllers\ProgrammeLikeController::class, 'unlike'])
+        ->name('programme.unlike');
+});

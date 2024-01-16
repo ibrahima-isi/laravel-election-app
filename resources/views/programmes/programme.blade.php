@@ -25,17 +25,21 @@
         </thead>
         <tbody>
             @foreach($programmes as $programme)
+{{--                    @dd($programme->id)--}}
                 <tr>
-                    <td>{{ strtoupper($programme->id) }}</td>
+                    <td>{{ $programme->id }}</td>
                     <td>{{ strtoupper( $programme->titre) }}</td>
                     <td>{{ strtoupper($programme->contenu) }}</td>
                     <td>{{ strtoupper($programme->document) }}</td>
                     <td>{{ strtoupper($programme->candidat?->nom.' '.$programme->candidat?->prenom) }}</td>
-                    <td>{{ strtoupper($programme->candidat?->nom.' '.$programme->candidat?->prenom) }}</td>
-
-                    <td class="d-flex justify-content-end">
+                    <td class="d-flex justify-content-center">
                         <a href="{{ route('editProgramme', [$programme]) }}" class="btn btn-info ">✍</a>
                         <a href="{{ route('editProgramme', [$programme]) }}" class="btn btn-danger">⌫</a>
+                        <div href="#" class="btn btn-success">
+{{--                            {{ $programme->likes()->count() }}--}}
+                            @include('programmes.like', ['programme'=>$programme])
+                        </div>
+
                     </td>
                 </tr>
             @endforeach

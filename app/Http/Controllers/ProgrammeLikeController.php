@@ -11,24 +11,35 @@ class ProgrammeLikeController extends Controller
     public function like(Programme $programme)
     {
         $liker = Auth::user();
-        $liker->likes()->attach($programme);
-//        $programmes = Programme::with([
-//            'candidat', 'secteurs', 'likes',
-//        ])->find($programme->id);
-//        dd($programmes);
+        $existingLike = $liker->likes()->find($programme->id);
+//        dd($existingLike);
+        if(!$existingLike){
+            $liker->likes()->attach($programme);
+            return view('programmes.programme', [
+                'programmes'=> Programme::with([
+                    'candidat',
+                    'secteurs',
+                    'likes',
+                ])->get()])->with('success', 'Liked');
+        }
         return view('programmes.programme', [
             'programmes'=> Programme::with([
-            'candidat', 'secteurs', 'likes',
-        ])->find($programme->id)])->with('success', 'Liked');
+                'candidat',
+                'secteurs',
+                'likes',
+                ])->get()])->with('error', 'Vous avez deja aimé ce progamme');
     }
 
     public function unlike(Programme $programme)
     {
         $liker = Auth::user();
-        $liker->likes()->detach($programme);
+        $existingLike = $liker->likes()->find($programme->id);
+        if ($existingLike){
+            $liker->likes()->detach($programme);
+        }
         $programmes = Programme::with([
            'candidat', 'secteurs', 'likes',
-        ])->find($programme->id);
+        ])->get();
         return view('programmes.programme', ['programmes'=>$programmes])->with('success', 'Liked');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\ElecteurController;
 use App\Http\Controllers\ProgrammeController;
+use App\Http\Controllers\ProgrammeLikeController;
 use App\Http\Controllers\SecteurController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,8 +80,10 @@ Route::middleware('auth')->controller(SecteurController::class) ->group(function
 });
 
 Route::middleware('auth')->group(function (){
-    Route::post('programmes/{programme}/like', [\App\Http\Controllers\ProgrammeLikeController::class, 'like'])
-    ->name('programme.like');
-    Route::post('programmes/{programme}/unlike', [\App\Http\Controllers\ProgrammeLikeController::class, 'unlike'])
+//    Route::post('programmes/{programme}/like', [\App\Http\Controllers\ProgrammeLikeController::class, 'like'])
+//    ->name('programme.like');
+    Route::post('/programme/{programme}/like', [ProgrammeLikeController::class, 'like'] )
+        ->name('programme.like');
+    Route::post('programmes/{programme}/unlike', [ProgrammeLikeController::class, 'unlike'])
         ->name('programme.unlike');
 });

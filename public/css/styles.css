@@ -1,0 +1,21 @@
+﻿.align-in-row{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1%;
+}
+
+/* th{
+    justify-content: space-evenly;
+} */
+/* table, tr, th, td{
+    background-color: white;
+    color: blue;
+    border-color: yellow;
+    border-collapse: collapse;
+    border-style: bold;
+    border-width: 3px;
+} */
+/* tr{
+    display: flex;
+    justify-content: space-evenly;
+} */

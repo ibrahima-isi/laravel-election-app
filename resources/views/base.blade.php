@@ -26,7 +26,7 @@
 @endphp
 <body class="bg-light m-5">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-        <a class="navbar-brand  @if($routeName === 'home') active @endif" href=" {{ route('auth.login') }}  ">{{ strtoupper('Home') }}</a>
+        <a class="navbar-brand  @if($routeName === 'home') active @endif" href=" {{ route('home') }}  ">{{ strtoupper('Home') }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

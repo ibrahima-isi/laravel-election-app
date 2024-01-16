@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\ElecteurController;
 use App\Http\Controllers\ProgrammeController;
@@ -19,21 +20,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function (){
-//    Route::get('/login', function () {
-//        return redirect()->route('candidat');
-//    })->name('auth.login');
-    Route::get('/', function () {
-        return redirect()->route('candidat');
-    });
-    Route::delete('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index'])->name('home');
+    Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 });
-//Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index'])->name('home');
-Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login');
-//Route::delete('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('auth.logout');
-Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
-Route::get('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('auth.register');
-Route::post('/register',[\App\Http\Controllers\AuthController::class, 'doRegister']);
+Route::controller(AuthController::class)->group(function (){
+    Route::get('/login', 'login')->name('auth.login');
+    Route::post('/login', 'doLogin');
+    Route::get('/register', 'register')->name('auth.register');
+    Route::post('/register','doRegister');
+});
+
 
 /// route to Candidats
 Route::controller(CandidatController::class)->group(function (){
@@ -80,8 +77,6 @@ Route::middleware('auth')->controller(SecteurController::class) ->group(function
 });
 
 Route::middleware('auth')->group(function (){
-//    Route::post('programmes/{programme}/like', [\App\Http\Controllers\ProgrammeLikeController::class, 'like'])
-//    ->name('programme.like');
     Route::post('/programme/{programme}/like', [ProgrammeLikeController::class, 'like'] )
         ->name('programme.like');
     Route::post('programmes/{programme}/unlike', [ProgrammeLikeController::class, 'unlike'])

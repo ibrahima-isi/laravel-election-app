@@ -13,12 +13,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-//        User::create([
-//            'name' => 'ibra',
-//            'email' => 'ibra@diallo.fr',
-//            'password' => Hash::make('passer'),
-//        ]);
-        return view('auth.login');
+        return view('welcome');
     }
 
     /**

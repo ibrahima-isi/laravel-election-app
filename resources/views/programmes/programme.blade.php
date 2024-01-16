@@ -11,10 +11,12 @@
             {{ session('error') }}
         </div>
     @endif
-    <div class="align-in-row">
-        <h1 class="h1 border-3">Liste des programmes</h1>
-        <a class="btn-lg btn btn-primary" href="{{ route('addProgramme')}}">Ajouter</a>
-    </div>
+    @if(auth()->check() && auth()->user()->role == 'admin')
+        <div class="align-in-row">
+            <h1 class="h1 border-3">Liste des programmes</h1>
+            <a class="btn-lg btn btn-primary" href="{{ route('addProgramme')}}">Ajouter</a>
+        </div>
+    @endif
 {{--    <table class="table table-primary table-striped table-hover table-bordered border-light">--}}
 {{--        <caption>Liste des programmes</caption>--}}
 {{--        <thead class="table-dark">--}}
@@ -63,6 +65,8 @@
             {{ $programme->contenu }}
         </p>
     @endforeach
+    @if(auth()->check() && auth()->user()->role == 'admin')
+        @endif
         @include('programmes.like')
     @endforeach
 @endsection

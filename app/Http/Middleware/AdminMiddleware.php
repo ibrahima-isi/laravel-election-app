@@ -20,7 +20,8 @@ class AdminMiddleware
         }
         // deconnexion avant redirection vers login page.
         auth()->logout();
-        return redirect()->intended(route('auth.login'))->with('error','Vous etes pas admin'); // Rediriger l'utilisateur normal (non-admin) vers la page d'accueil
+        return redirect()->intended(route('auth.login'))
+            ->with('error','Vous etes pas admin'); // Rediriger l'utilisateur normal (non-admin) vers la page d'accueil
     }
 
 

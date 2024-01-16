@@ -7,10 +7,12 @@
             {{ session('success') }}
         </div>
     @endif
-<div class="align-in-row">
-    <h1 class="h1 border-3">La liste des secteurs</h1>
-    <a class="btn-lg btn btn-primary" href="{{ route('addSecteur')}}">Ajouter</a>
-</div>
+    @if(auth()->check() && auth()->user()->role == 'admin')
+        <div class="align-in-row">
+            <h1 class="h1 border-3">La liste des secteurs</h1>
+            <a class="btn-lg btn btn-primary" href="{{ route('addSecteur')}}">Ajouter</a>
+        </div>
+    @endif
 <table class="table table-primary table-striped table-hover table-bordered border-light">
     <caption>Liste des secteurs</caption>
     <thead class="table-dark">

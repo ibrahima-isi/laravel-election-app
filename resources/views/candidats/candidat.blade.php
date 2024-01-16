@@ -7,10 +7,13 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="align-in-row">
-        <h1 class="h1 border-3">La liste des candidats</h1>
-        <a class="btn-lg btn btn-primary" href="{{ route('addCandidat')}}">Ajouter</a>
-    </div>
+    @if(auth()->check() && auth()->user()->role == 'admin'))
+        <div class="align-in-row">
+            <h1 class="h1 border-3">La liste des candidats</h1>
+            <a class="btn-lg btn btn-primary" href="{{ route('addCandidat')}}">Ajouter</a>
+        </div>
+    @endif
+
 {{--    <table class="table table-primary table-striped table-hover table-bordered border-light">--}}
 {{--        <caption>Liste des candidats</caption>--}}
 {{--        <thead class="table-dark">--}}
@@ -80,8 +83,10 @@
             @else
                 <p>No programme associated with this candidat.</p>
             @endif
-            <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-info ">✍</a>
-            <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-danger">⌫</a>
+            @if(auth()->check() && auth()->user()->role == 'admin'))
+                <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-info ">✍</a>
+                <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-danger">⌫</a>
+            @endif
         </section>
     @endforeach
     <p>{{ $candidats->links() }}</p>

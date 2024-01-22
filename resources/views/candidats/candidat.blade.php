@@ -7,7 +7,7 @@
             {{ session('success') }}
         </div>
     @endif
-    @if(auth()->check() && auth()->user()->role == 'admin'))
+    @if(auth()->check() && auth()->user()->role == 'admin')
         <div class="align-in-row">
             <h1 class="h1 border-3">La liste des candidats</h1>
             <a class="btn-lg btn btn-primary" href="{{ route('addCandidat')}}">Ajouter</a>
@@ -55,7 +55,6 @@
              @if ($candidat->biographie)
                     <h4>Biographie :</h4>
                     {{ $candidat->biographie}}
-                    {{ $candidat->biographie}}
             @else
                     <p>Pas de Biographie pour ce candidat.</p>
             @endif
@@ -76,16 +75,23 @@
                     <h6>Secteurs : </h6>
                     @foreach ($secteurs as $secteur)
                         <div class="btn btn-secondary" >
-                            {{ $secteur->libelle.'  ' }}
+                            {{ $secteur->libelle.' | ' }}
                         </div>
                     @endforeach
                 @endif
             @else
                 <p>No programme associated with this candidat.</p>
             @endif
-            @if(auth()->check() && auth()->user()->role == 'admin'))
-                <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-info ">✍</a>
-                <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-danger">⌫</a>
+            @if(auth()->check() && auth()->user()->role == 'admin')
+                <div class="d-flex">
+                    <a href="{{ route('editCandidat', [$candidat]) }}" class="btn btn-info ">Modifier ✍</a>
+                    <form action="{{ route('delete.candidat', [$candidat]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"  class="btn btn-danger">Supprimer ⌫</button>
+                    </form>
+                </div>
+{{--                <a href="{{ route('delete.candidat', [$candidat]) }}" class="btn btn-danger"></a>--}}
             @endif
         </section>
     @endforeach

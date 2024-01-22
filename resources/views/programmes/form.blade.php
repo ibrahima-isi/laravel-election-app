@@ -27,7 +27,7 @@
             </div>
             <div class="mb-3">
                 <label for="document" class="form-label">document</label>
-                <input class="form-control form-control-lg" type="file" id="document" name="document" value="{{ old('titre', $programme->document) }}">
+                <input class="form-control form-control-lg" type="text" id="document" name="document" value="{{ old('titre', $programme->document) }}">
                 @error('document') {{ $message }} @enderror
 
             </div>

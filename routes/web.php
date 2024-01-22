@@ -40,6 +40,7 @@ Route::controller(CandidatController::class)->group(function (){
         Route::post('/addCandidats', 'store')->name('storeCandidat');
         Route::get('/{candidat}/edit', 'edit')->name('editCandidat');
         Route::post('/{candidat}/edit', 'update')->name('updateCandidat');
+        Route::delete('/delete/{candidat}', 'destroy')->name('delete.candidat');
     });
 });
 
@@ -51,6 +52,8 @@ Route::controller(ElecteurController::class)->group(function (){
         Route::post('/addElecteurs', 'store')->name('storeElecteur');
         Route::get('/edit/{electeur}', 'edit')->name('editElecteur');
         Route::post('/edit/{electeur}', 'update');
+        Route::delete('/delete/{electeur}', 'destroy')->name('delete.electeur');
+
     });
 });
 
@@ -60,8 +63,10 @@ Route::controller(ProgrammeController::class)->group(function (){
     Route::middleware('admin')->group(function (){
         Route::get('/addProgrammes', 'create')->name('addProgramme');
         Route::post('/addProgrammes', 'store')->name('storeProgramme');
-        Route::get('/edit/{programme}', 'edit')->name('editProgramme');
-        Route::post('/edit/{programme}', 'update');
+        Route::delete('/delete/{programme}', 'destroy')->name('delete.programme');
+
+        Route::get('/edit-programme/{programme}', 'edit')->name('edit-programme');
+        Route::post('/edit-programme/{programme}', 'update');
     });
 });
 
@@ -71,8 +76,9 @@ Route::middleware('auth')->controller(SecteurController::class) ->group(function
     Route::middleware('admin')->group(function (){
         Route::post('/addSecteurs', 'store')->name('storeSecteur');
         Route::get('/addSecteurs','create')->name('addSecteur');
-        Route::get('/edit/{secteur}', 'edit')->name('editSecteur');
-        Route::post('/edit/{secteur}', 'update');
+        Route::get('/edit-secteur/{secteur}', 'edit')->name('edit-secteur');
+        Route::delete('/delete/{secteur}', 'destroy')->name('delete.secteur');
+
     });
 });
 

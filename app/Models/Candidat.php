@@ -21,7 +21,7 @@ class Candidat extends Model
     protected $guarded = [];
 
     public function programmes(){
-        return $this->hasOne(Programme::class);
+        return $this->hasOne(Programme::class, 'candidat_id');
     }
 
 }

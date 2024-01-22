@@ -32,8 +32,12 @@
                 <td>{{ strtoupper($secteur->couleur) }}</td>
                 <td>{{ strtoupper($secteur->icon) }}</td>
                 <td class="d-flex justify-content-end">
-                    <a href="{{ route('editSecteur', [$secteur]) }}" class="btn btn-info ">✍</a>
-                    <a href="{{ route('editSecteur', [$secteur]) }}" class="btn btn-danger">⌫</a>
+                    <a href="{{ route('edit-secteur', [$secteur]) }}" class="btn btn-info ">Modifier ✍</a>
+                    <form action="{{ route('delete.secteur', [$secteur]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"  class="btn btn-danger">Supprimer ⌫</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

@@ -63,15 +63,23 @@ class SecteurController extends Controller
      */
     public function update(createSecteurRequest $request, Secteur $secteur)
     {
+        if($request->validated()){
+            $secteur->couleur = $request->couleur;
+            $secteur->libelle = $request->libelle;
+            $secteur->icon = $request->icon;
+            $secteur->save();
+            return to_route('secteur')->with('success', 'Modification reussie');
+        }
+        return to_route('secteur')->with('error', 'echec de Modification ');
 
-        return to_route('secteur')->with('success', 'Modification reussie');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Secteur $secteur)
     {
-        //
+        $secteur->delete();
+        return to_route('secteur')->with('success', 'deleted successfully');
     }
 }

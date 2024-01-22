@@ -73,24 +73,33 @@ class ProgrammeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Programme $programme)
     {
-        //
+        return view('programmes.edit', ['programme' => $programme]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(createProgrammeRequest $request, Programme $programme)
     {
-        //
+        if($request->validated()){
+            $programme->titre = $request->input('titre');
+            $programme->contenu = $request->input('contenu');
+            $programme->document = $request->input('document');
+            $programme->delais = $request->input('delais');
+            $programme->save();
+            return to_route('programme')->with('success', 'Programme updated successfully');
+        }
+        return to_route('programme')->with('error', 'Programme not updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Programme $programme)
     {
-        //
+        $programme->delete();
+        return to_route('programme')->with('success', 'deleted successfully');
     }
 }

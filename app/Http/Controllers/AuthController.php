@@ -13,11 +13,7 @@ class AuthController extends Controller
 {
     public function login()
     {
-//        User::create([
-//           'name' => 'Admin',
-//           'email' => 'ibra@test.fr',
-//           'password' => Hash::make('passer'),
-//        ]);
+
         \auth()->logout();
         return view('auth.login');
     }

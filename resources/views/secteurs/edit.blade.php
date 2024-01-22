@@ -1,5 +1,5 @@
 @extends('base')
-@section('title', 'Ajouter Un Secteur')
+@section('title', 'Modifier Un Secteur')
 
 @section('content')
     @include('secteurs.form')

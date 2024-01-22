@@ -26,6 +26,7 @@ class createProgrammeRequest extends FormRequest
             'contenu'=>['required'],
             'delais'=>'required',
             'candidat_id'=>'unique:programmes',
+            'document'=>'required',
 
         ];
     }

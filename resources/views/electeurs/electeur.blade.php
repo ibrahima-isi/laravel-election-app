@@ -7,7 +7,7 @@
             {{ session('success') }}
         </div>
     @endif
-    @if(auth()->check() && auth()->user()->role == 'admin'))
+    @if(auth()->check() && auth()->user()->role == 'admin')
 
         <div class="align-in-row">
             <h1 class="h1 border-3">La liste des electeurs</h1>
@@ -39,9 +39,13 @@
                     </td>
                     <td>{{ strtoupper($electeur->adresse) }}</td>
                     @if(auth()->check() && auth()->user()->role == 'admin')
-                        <td class="d-flex justify-content-end">
-                            <a href="{{ route('editElecteur', [$electeur]) }}" class="btn btn-info ">✍</a>
-                            <a href="{{ route('editElecteur', [$electeur]) }}" class="btn btn-danger">⌫</a>
+                        <td class="d-flex justify-content-sm-end">
+                            <a href="{{ route('editElecteur', [$electeur]) }}" class="btn btn-info ">Modifier✍</a>
+                            <form action="{{ route('delete.electeur', [$electeur]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"  class="btn btn-danger">Supprimer ⌫</button>
+                            </form>
                         </td>
                     @endif
                 </tr>

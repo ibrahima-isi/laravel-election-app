@@ -94,8 +94,9 @@ class ElecteurController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Electeur $electeur)
     {
-        //
+        $electeur->delete();
+        return to_route('electeur')->with('success', 'Deleted successfully');
     }
 }
